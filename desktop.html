@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <title>
+            ZOS
+        </title>
+        <style>
+
+            * {
+                font-family: 'Roboto', sans-serif;
+            }
+
+            body {
+                background-image: url("background.png");
+                overflow: hidden;
+            }
+
+            .tray {
+                background: gray;
+                width: 100%;
+                height: 50px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 25px 25px 0px 0px;
+                transition: 0.3s;
+                z-index: 999;
+            }
+
+            .menu-button {
+                width: 40px;
+                height: 40px;
+                margin-left: 6px;
+                margin-top: 3px;
+                background: white;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .docs {
+                background-image: url("google_docs.png");
+                background-position: center;
+                background-size: cover;
+            }
+
+            .files {
+                width: 800px;
+                height: 450px;
+                background: red;
+            }
+
+            #files {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                box-shadow: 0px 4px 10px gray;
+                text-align: center;
+                border-radius: 5px;
+                height: 450px;
+                z-index: 1;
+            }
+
+            #filesheader {
+                padding: 10px;
+                border-radius: 5px 5px 0px 0px;
+                z-index: 10;
+                background-color: rgb(0, 0, 0);
+                color: #fff;
+                width: 800px;
+                height: 20px;
+            }
+
+            .exit-app {
+                background: red;
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                box-shadow: 10px 10px 10px inset rgb(255, 59, 59);
+                cursor: pointer;
+            }
+
+            .maximize-app {
+                background: green;
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                position: absolute;
+                top: 5px;
+                right: 40px;
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            function menu() {
+                var taskbar = document.getElementById("taskbar");
+
+                
+
+                if (taskbar.style.width == "300px") {
+                    taskbar.style.width = "100%";
+                    taskbar.style.height = "50px";
+                    taskbar.style.bottom = "0";
+                    taskbar.style.left = "0";
+                    taskbar.style.right = "0";
+                    taskbar.style.borderRadius = "25px 25px 0px 0px";
+                    taskbar.style.boxShadow = "none";
+                } else {
+                    taskbar.style.width = "300px";
+                    taskbar.style.height = "500px";
+                    taskbar.style.bottom = "10px";
+                    taskbar.style.left = "20px";
+                    taskbar.style.borderRadius = "10px";
+                    taskbar.style.boxShadow = "0px 4px 10px gray";
+                }
+            }
+
+            function closeMenu() {
+                var taskbar = document.getElementById("taskbar");
+
+                taskbar.style.width = "100%";
+                taskbar.style.height = "50px";
+                taskbar.style.bottom = "0";
+                taskbar.style.left = "0";
+                taskbar.style.right = "0";
+                taskbar.style.borderRadius = "25px 25px 0px 0px";
+                taskbar.style.boxShadow = "none";
+            }
+
+            function openDocs() {
+                closeMenu();
+                document.getElementById("files").style.display = "block"
+            }
+
+            function closeApp(appName) {
+                document.getElementById(appName).style.display = "none";
+            }
+        </script>
+    </head>
+    <body>
+
+        <!--
+            Apps |
+                \/
+        -->
+            <div id="files">
+                <div class="exit-app" onclick="closeApp('files')"></div>
+                <div class="maximize-app"></div>
+                <div id="filesheader">Files</div>
+                    <p>
+                        Text
+                    </p>
+                </div>
+
+
+                <script>
+                    dragElement(document.getElementById("files"));
+
+                    function dragElement(elmnt) {
+                    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                    if (document.getElementById(elmnt.id + "header")) {
+                        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+                    } else {
+                        elmnt.onmousedown = dragMouseDown;
+                    }
+
+                    function dragMouseDown(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        document.onmouseup = closeDragElement;
+                        document.onmousemove = elementDrag;
+                    }
+
+                    function elementDrag(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        pos1 = pos3 - e.clientX;
+                        pos2 = pos4 - e.clientY;
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                    }
+
+                    function closeDragElement() {
+                        document.onmouseup = null;
+                        document.onmousemove = null;
+                    }
+                    }
+                </script>
+
+
+
+
+        <div class="tray" id="taskbar">
+            <div onclick="menu()" class="menu-button"></div>
+            <br>
+            <br>
+            <div class="menu-button docs" onclick="openDocs()"></div>
+        </div>
+    </body>
+</html>
