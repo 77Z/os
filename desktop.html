@@ -17,10 +17,13 @@
             body {
                 background-image: url("background.png");
                 overflow: hidden;
+                background-position-x: center;
+                background-repeat: no-repeat;
+                background-size: cover;
             }
 
             .tray {
-                background: gray;
+                background: rgb(75, 75, 75);
                 width: 100%;
                 height: 50px;
                 position: fixed;
@@ -52,6 +55,7 @@
                 width: 800px;
                 height: 450px;
                 background: red;
+                transition: 0.5s;
             }
 
             #files {
@@ -63,6 +67,7 @@
                 border-radius: 5px;
                 height: 450px;
                 z-index: 1;
+                display: none;
             }
 
             #filesheader {
@@ -96,6 +101,32 @@
                 top: 5px;
                 right: 40px;
                 cursor: pointer;
+            }
+
+            .clock {
+                position: absolute;
+                color: #ffffff;
+                right: 10px;
+                top: 5px;
+                font-size: 20px;
+            }
+
+            #fullscreen-dot {
+                display: none;
+                box-shadow: 10px 10px 50px gray;
+            }
+
+            .f-menu {
+                position: fixed;
+                z-index: 1000;
+                height: 600px;
+                width: 400px;
+                background: #ffffff;
+                box-shadow: 10px 10px 50px gray;
+                border-radius: 2px;
+                bottom: 70px;
+                left: -450px;
+                transition: 0.5s;
             }
         </style>
         <script>
@@ -142,17 +173,99 @@
             function closeApp(appName) {
                 document.getElementById(appName).style.display = "none";
             }
+
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML =
+                h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+                function checkTime(i) {
+                if (i < 10) {i = "0" + i};
+                return i;
+            }
+            
+            function maximize(app) {
+                var appname = document.getElementById(app);
+                var appbar = document.getElementById(app + "header");
+                var taskbar = document.getElementById("taskbar");
+                var dot = document.getElementById("dot");
+                var clock = document.getElementById("txt");
+                var fdot = document.getElementById("fullscreen-dot");
+
+
+                if (appname.style.width == "100%") {
+
+                    //un-maximize
+
+                    appbar.style.display = "block";
+
+                    taskbar.style.background = "rgb(75, 75, 75)";
+
+                    dot.style.display = "inline-block";
+
+                    fdot.style.display = "none";
+
+                    clock.style.textShadow = "none";
+
+                    appname.style.height = "450px";
+                    appname.style.width = "unset";
+                    appname.style.top = "20px";
+                    appname.style.left = "20px";
+                    appname.style.transition = "0s";
+                } else {
+
+                    //maximize
+
+                    appbar.style.display = "none";
+
+
+                    taskbar.style.background = "transparent";
+
+                    dot.style.display = "none";
+
+                    fdot.style.display = "inline-block";
+
+                    clock.style.textShadow = "2px 2px 20px gray";
+
+                    appname.style.transition = "0.5s";
+                    appname.style.height = "100%";
+                    appname.style.width = "100%";
+                    appname.style.top = "0";
+                    appname.style.left = "0";
+                }                
+            }
+
+            function fmenu() {
+                var fmenu = document.getElementById("full-menu");
+
+                if (fmenu.style.left == "20px") {
+                    //close drawer
+
+                    fmenu.style.left = "-450px";
+                } else {
+                    //open drawer
+
+                    fmenu.style.left = "20px";
+                }
+            }
+
+            function closefmenu() {
+                var fmenu = document.getElementById("full-menu");
+
+                fmenu.style.left = "-450px";
+            }
         </script>
     </head>
-    <body>
-
-        <!--
-            Apps |
-                \/
-        -->
+    <body onload="startTime()">
             <div id="files">
                 <div class="exit-app" onclick="closeApp('files')"></div>
-                <div class="maximize-app"></div>
+                <div class="maximize-app" onclick="maximize('files'), closefmenu()"></div>
                 <div id="filesheader">Files</div>
                     <p>
                         Text
@@ -200,9 +313,13 @@
 
 
 
+            <div class="f-menu" id="full-menu"></div>
+
 
         <div class="tray" id="taskbar">
-            <div onclick="menu()" class="menu-button"></div>
+            <div onclick="menu()" class="menu-button" id="dot"></div>
+            <div onclick="fmenu()" class="menu-button" id="fullscreen-dot"></div>
+            <div id="txt" class="clock"></div>
             <br>
             <br>
             <div class="menu-button docs" onclick="openDocs()"></div>
