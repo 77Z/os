@@ -1,1 +1,187 @@
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <div class="circle">
+    <div class="circle__inner">
+      <div class="circle__wrapper">
+        <div class="circle__content"></div>
+      </div>
+    </div>
+  </div>
 
+  <div class="ps">
+    <div class="container">
+      <div class="form-wrap">
+
+        <input type="text" placeholder="Enter Password" />
+
+        <div class="icon">
+          <a href="loader">
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+        </div>
+      </div>
+      <span>966-xxx-xxx-xxx</span>
+    </div>
+  </div>
+<style>
+  html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 64px auto;
+  max-width: 640px;
+  width: 300px;
+  text-align: center;
+}
+
+/**
+ * Circle Styles
+ */
+
+.circle {
+  position: relative;
+  display: block;
+  margin: 2em 0;
+  background-color: transparent;
+  color: #222;
+  text-align: center;
+}
+
+.circle:after {
+  display: block;
+  padding-bottom: 100%;
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #ddd;
+  content: "";
+}
+
+.circle__inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+}
+
+.circle__wrapper {
+  display: table;
+  width: 300px;
+  height: 300px;
+}
+
+.circle__content {
+  display: table-cell;
+  padding: 1em;
+  vertical-align: middle;
+}
+
+@media (min-width: 480px) {
+  .circle__content {
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 768px) {
+  .circle__content {
+    font-size: 4em;
+  }
+}
+
+html {
+  background: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.container {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.form-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid #3EAD75;
+  padding: 10px;
+  width: 300px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  margin: auto;
+  box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+  transition: 300ms all ease;
+  /*   background:rgba(0,0,0,.15); */
+}
+
+input:focus {
+  box-shadow: 0 0 10px #4A90BE;
+  border: 1px solid #4A90BE;
+}
+
+span {
+  display: block;
+  background: rgba(0, 0, 0, .3);
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  position: absolute;
+  display: none;
+  top: 0;
+  right: -45%;
+  color: #fff;
+}
+
+span:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-right: 10px solid rgba(0, 0, 0, .3);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  left: -10px;
+  top: 14px;
+}
+
+.ps input[type=text] {
+  padding-right: 40px;
+}
+
+.ps {
+  position: relative;
+}
+
+.ps i {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  padding: 4px 8px;
+  color: #aaa;
+  transition: .3s;
+}
+
+.ps input[type=text]+focus+i {
+  color: #aaa;
+}
+
+  </style>
