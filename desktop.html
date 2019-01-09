@@ -142,6 +142,27 @@
                 left: -450px;
                 transition: 0.5s;
             }
+
+            .notification {
+                box-shadow: 0px 2px 10px gray;
+                position: fixed;
+                bottom: 70px;
+                right: -1000px;
+                width: 400px;
+                height: 100px;
+                background: #ffffff;
+                transition: 0.5s;
+                z-index: 100;
+            }
+
+            .notification h3 {
+                margin-left: 5px;
+                text-transform: capitalize;
+            }
+
+            .notification span {
+                margin-left: 15px;
+            }
         </style>
         <script>
             function menu() {
@@ -297,9 +318,28 @@
 
                 clock.style.textShadow = "none";
             }
+
+            function notification(title, content) {
+                var notification = document.getElementById("notification");
+
+                notification.innerHTML = "<h3>" + title + "</h3><span>" + content + "</span>";
+
+                notification.style.right = "10px";
+
+                setInterval(closeNotif, 3000);
+            }
+
+            function closeNotif() {
+                var notification = document.getElementById("notification");
+
+                notification.style.right = "-1000px";
+            }
         </script>
     </head>
     <body onload="startTime()">
+
+            <div class="notification" id="notification"></div>
+
             <div id="files">
                 <div id="window-function-container">
                     <div class="exit-app" id="exit" onclick="closeApp('files'), closefmenu(), normTaskbar()"></div>
@@ -363,6 +403,8 @@
             <br>
             <br>
             <div class="menu-button docs" onclick="openDocs()"></div>
+            <br>
+            <div class="menu-button" onclick="notification('test', 'testing testing words')"></div>
         </div>
     </body>
 </html>
