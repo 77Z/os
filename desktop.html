@@ -12,6 +12,7 @@
 
             * {
                 font-family: 'Roboto', sans-serif;
+                user-select:none;
             }
 
             body {
@@ -80,14 +81,28 @@
                 height: 20px;
             }
 
+            #window-function-container {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 70px;
+            }
+
+            #window-function-container:hover ~ .exit-app {
+                top: unset;
+            }
+
+            #window-function-container:hover ~ .maximize-app {
+                top: unset;
+            }
+
             .exit-app {
                 background: red;
                 height: 30px;
                 width: 30px;
                 border-radius: 50%;
                 position: absolute;
-                top: 5px;
-                right: 5px;
+                right: 0;
                 box-shadow: 10px 10px 10px inset rgb(255, 59, 59);
                 cursor: pointer;
             }
@@ -98,8 +113,7 @@
                 width: 30px;
                 border-radius: 50%;
                 position: absolute;
-                top: 5px;
-                right: 40px;
+                left: 0;
                 cursor: pointer;
             }
 
@@ -122,7 +136,7 @@
                 height: 600px;
                 width: 400px;
                 background: #ffffff;
-                box-shadow: 10px 10px 50px gray;
+                box-shadow: 0px 2px 10px gray;
                 border-radius: 2px;
                 bottom: 70px;
                 left: -450px;
@@ -197,6 +211,8 @@
                 var dot = document.getElementById("dot");
                 var clock = document.getElementById("txt");
                 var fdot = document.getElementById("fullscreen-dot");
+                var maximize = document.getElementById("maximize");
+                var exit = document.getElementById("exit");
 
 
                 if (appname.style.width == "100%") {
@@ -218,6 +234,9 @@
                     appname.style.top = "20px";
                     appname.style.left = "20px";
                     appname.style.transition = "0s";
+
+                    //maximize.style.top = "unset";
+                   // exit.style.top = "unset";
                 } else {
 
                     //maximize
@@ -238,6 +257,10 @@
                     appname.style.width = "100%";
                     appname.style.top = "0";
                     appname.style.left = "0";
+
+
+                    //maximize.style.top = "-10px";
+                    //exit.style.top = "-10px";
                 }                
             }
 
@@ -260,12 +283,29 @@
 
                 fmenu.style.left = "-450px";
             }
+
+            function normTaskbar() {
+                var taskbar = document.getElementById("taskbar");
+                var dot = document.getElementById("dot");
+                var fdot = document.getElementById("fullscreen-dot");
+
+                taskbar.style.background = "rgb(75, 75, 75)";
+
+                dot.style.display = "inline-block";
+
+                fdot.style.display = "none";
+
+                clock.style.textShadow = "none";
+            }
         </script>
     </head>
     <body onload="startTime()">
             <div id="files">
-                <div class="exit-app" onclick="closeApp('files')"></div>
-                <div class="maximize-app" onclick="maximize('files'), closefmenu()"></div>
+                <div id="window-function-container">
+                    <div class="exit-app" id="exit" onclick="closeApp('files'), closefmenu(), normTaskbar()"></div>
+                    <div class="maximize-app" id="maximize" onclick="maximize('files'), closefmenu()"></div>
+                </div>
+                
                 <div id="filesheader">Files</div>
                     <p>
                         Text
