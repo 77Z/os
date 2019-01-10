@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title>
             ZOS
         </title>
@@ -120,7 +121,7 @@
             .clock {
                 position: absolute;
                 color: #ffffff;
-                right: 10px;
+                right: 60px;
                 top: 5px;
                 font-size: 20px;
             }
@@ -163,14 +164,71 @@
             .notification span {
                 margin-left: 15px;
             }
+
+            .notifications-button {
+                top: 0;
+                right: 0;
+                font-size: 45px;
+                color: #ffffff;
+                text-align: center;
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                background: transparent;
+                transition: 0.3s;
+            }
+
+            .notifications-button:hover {
+                background: #ffffff50;
+            }
+
+            .notifications-box {
+                position: fixed;
+                background: #999999;
+                border-radius: 3px;
+                bottom: -450px;
+                z-index: 1000;
+                opacity: 0;
+                text-shadow: 10px 10px 50px gray;
+                right: 10px;
+                box-shadow: 0px 2px 10px gray;
+                height: 400px;
+                width: 300px;
+                transition: 0.3s;
+            }
+
+            .notifications-box-title {
+                font-size: 25px;
+                text-align: center;
+                color: #ffffff;
+                margin-top: 10px;
+            }
+
+            .notifications-box-content {
+                background: #ffffff;
+                margin-left: 10px;
+                margin-right: 10px;
+                border-radius: 3px;
+            }
+
+            .notifications-box-content h3 {
+                margin-left: 10px;
+            }
+
+            .notifications-box-content span {
+                margin-left: 10px;
+            }
         </style>
         <script>
-            function menu() {
+            function menu()
+            {
                 var taskbar = document.getElementById("taskbar");
 
                 
 
-                if (taskbar.style.width == "300px") {
+                if (taskbar.style.width == "300px")
+                {
                     taskbar.style.width = "100%";
                     taskbar.style.height = "50px";
                     taskbar.style.bottom = "0";
@@ -178,7 +236,9 @@
                     taskbar.style.right = "0";
                     taskbar.style.borderRadius = "25px 25px 0px 0px";
                     taskbar.style.boxShadow = "none";
-                } else {
+                }
+                else
+                {
                     taskbar.style.width = "300px";
                     taskbar.style.height = "500px";
                     taskbar.style.bottom = "10px";
@@ -188,7 +248,8 @@
                 }
             }
 
-            function closeMenu() {
+            function closeMenu()
+            {
                 var taskbar = document.getElementById("taskbar");
 
                 taskbar.style.width = "100%";
@@ -200,16 +261,19 @@
                 taskbar.style.boxShadow = "none";
             }
 
-            function openDocs() {
+            function openDocs()
+            {
                 closeMenu();
                 document.getElementById("files").style.display = "block"
             }
 
-            function closeApp(appName) {
+            function closeApp(appName)
+            {
                 document.getElementById(appName).style.display = "none";
             }
 
-            function startTime() {
+            function startTime()
+            {
                 var today = new Date();
                 var h = today.getHours();
                 var m = today.getMinutes();
@@ -220,12 +284,14 @@
                 h + ":" + m + ":" + s;
                 var t = setTimeout(startTime, 500);
             }
-                function checkTime(i) {
+                function checkTime(i)
+                {
                 if (i < 10) {i = "0" + i};
                 return i;
             }
             
-            function maximize(app) {
+            function maximize(app)
+            {
                 var appname = document.getElementById(app);
                 var appbar = document.getElementById(app + "header");
                 var taskbar = document.getElementById("taskbar");
@@ -236,7 +302,8 @@
                 var exit = document.getElementById("exit");
 
 
-                if (appname.style.width == "100%") {
+                if (appname.style.width == "100%")
+                {
 
                     //un-maximize
 
@@ -285,7 +352,8 @@
                 }                
             }
 
-            function fmenu() {
+            function fmenu()
+            {
                 var fmenu = document.getElementById("full-menu");
 
                 if (fmenu.style.left == "20px") {
@@ -299,13 +367,15 @@
                 }
             }
 
-            function closefmenu() {
+            function closefmenu()
+            {
                 var fmenu = document.getElementById("full-menu");
 
                 fmenu.style.left = "-450px";
             }
 
-            function normTaskbar() {
+            function normTaskbar()
+            {
                 var taskbar = document.getElementById("taskbar");
                 var dot = document.getElementById("dot");
                 var fdot = document.getElementById("fullscreen-dot");
@@ -319,8 +389,12 @@
                 clock.style.textShadow = "none";
             }
 
-            function notification(title, content) {
+            function notification(title, content)
+            {
                 var notification = document.getElementById("notification");
+                var notificationHistory = document.getElementById("notifications-box-content");
+
+                notificationHistory.innerHTML = "<h3>" + title + "</h3><span>" + content + "</span>";
 
                 notification.innerHTML = "<h3>" + title + "</h3><span>" + content + "</span>";
 
@@ -329,10 +403,27 @@
                 setInterval(closeNotif, 3000);
             }
 
-            function closeNotif() {
+            function closeNotif()
+            {
                 var notification = document.getElementById("notification");
 
                 notification.style.right = "-1000px";
+            }
+
+            function notifBoxToggle()
+            {
+                var notifBox = document.getElementById("notifications-box");
+
+                if (notifBox.style.bottom == "-450px")
+                {
+                    notifBox.style.bottom = "60px";
+                    notifBox.style.opacity = "1";
+                }
+                else
+                {
+                    notifBox.style.opacity = "0";
+                    notifBox.style.bottom = "-450px";
+                }
             }
         </script>
     </head>
@@ -400,11 +491,21 @@
             <div onclick="menu()" class="menu-button" id="dot"></div>
             <div onclick="fmenu()" class="menu-button" id="fullscreen-dot"></div>
             <div id="txt" class="clock"></div>
+            <div class="material-icons notifications-button" onclick="notifBoxToggle()">
+                notifications
+            </div>
             <br>
             <br>
             <div class="menu-button docs" onclick="openDocs()"></div>
             <br>
             <div class="menu-button" onclick="notification('test', 'testing testing words')"></div>
+        </div>
+
+        <div class="notifications-box" id="notifications-box">
+            <div class="notifications-box-title">
+                Previous Notification:
+            </div>
+            <div class="notifications-box-content" id="notifications-box-content"></div>
         </div>
     </body>
 </html>
