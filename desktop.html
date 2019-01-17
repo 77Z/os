@@ -14,6 +14,7 @@
             * {
                 font-family: 'Roboto', sans-serif;
                 user-select:none;
+                cursor: url("cursor.png"), auto;
             }
 
             body {
@@ -87,6 +88,32 @@
             }
 
             #messages {
+                position: absolute;
+                z-index: 9;
+                background-color: #f1f1f1;
+                box-shadow: 0px 4px 10px gray;
+                text-align: center;
+                border-radius: 5px;
+                height: 450px;
+                z-index: 1;
+                display: none;
+                resize: both;
+                overflow-y: auto;
+                overflow-x: hidden;
+                width: 800px;
+            }
+
+            #messagesheader {
+                padding: 10px;
+                border-radius: 5px 5px 0px 0px;
+                z-index: 10;
+                background-color: rgb(0, 0, 0);
+                color: #fff;
+                width: 100%;
+                height: 20px;
+            }
+
+            #internet {
                 position: absolute;
                 z-index: 9;
                 background-color: #f1f1f1;
@@ -250,6 +277,16 @@
 
             .notifications-box-content span {
                 margin-left: 10px;
+            }
+
+            #in-text-input {
+                border: none;
+                box-shadow: 0px 2px 10px gray;
+                border-radius: 10px;
+                width: 70%;
+                padding: 5px;
+                outline: none;
+                margin-top: 5px;
             }
         </style>
         <script>
@@ -462,6 +499,11 @@
                 document.getElementById("messages").style.display = "block";
                 closeMenu();
             }
+
+            function openInternet() {
+                document.getElementById("internet").style.display = "block";
+                closeMenu();
+            }
         </script>
     </head>
     <body onload="startTime()">
@@ -484,6 +526,23 @@
                 </p>
             </div>
 
+            <div id="internet">
+
+                <div id="window-function-container">
+                    <div class="exit-app" id="exit" onclick="closeApp('internet'), closefmenu(), normTaskbar()"></div>
+                    <div class="maximize-app" id="maximize" onclick="maximize('internet'), closefmenu()"></div>
+                </div>
+
+
+                <div id="internetheader">
+                    Internet
+                </div>
+                <div class="in-search-container">
+                    <input type="text" name="search" id="in-text-input">
+                </div>
+                <iframe src="https://google.com" frameborder="0"></iframe>
+            </div>
+
             <div id="files">
                 <div id="window-function-container">
                     <div class="exit-app" id="exit" onclick="closeApp('files'), closefmenu(), normTaskbar()"></div>
@@ -501,6 +560,8 @@
                     dragElement(document.getElementById("files"));
 
                     dragElement(document.getElementById("messages"));
+
+                    dragElement(document.getElementById("internet"));
 
                     function dragElement(elmnt) {
                     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -553,6 +614,7 @@
             <br>
             <div class="menu-button docs" onclick="openDocs()"></div>
             <div class="menu-button material-icons" style="text-align: center;color: black;font-size: 25px;" onclick="openMessages()">message</div>
+            <div class="menu-button" style="background-image: url('internet.png');" onclick="openInternet()"></div>
             <br>
             <div class="menu-button" onclick="notification('test', 'testing testing words')"></div>
         </div>
