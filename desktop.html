@@ -384,6 +384,15 @@
                 position: absolute;
                 top: 0px;
             }
+
+            .files-nav-bar {
+                position: absolute;
+                left: 0;
+                top: 50px;
+                height: 90%;
+                width: 300px;
+                background: black;
+            }
         </style>
         <script>
             function menu()
@@ -628,6 +637,17 @@
     </head>
     <body onload="startTime()" id="body">
 
+
+
+            <button id="soft-restart-button">
+                SOFT RESTART
+            </button>
+
+            <button id="sleep-btn">
+                SLEEP
+            </button>
+
+
             <div class="notification" id="notification"></div>
 
             <div id="messages">
@@ -670,9 +690,7 @@
                 </div>
                 
                 <div id="filesheader">Files</div>
-                    <p>
-                        Text
-                    </p>
+                    <div class="files-nav-bar"></div>
                 </div>
 
                 <div id="settings">
@@ -773,5 +791,22 @@
             </div>
             <div class="notifications-box-content" id="notifications-box-content"></div>
         </div>
+
+
+
+        <!--
+
+
+            Scripts
+
+
+
+        -->
+
+
+
+        <script src="hardware-interaction-controller.js"></script>
+
+
     </body>
 </html>
