@@ -115,6 +115,7 @@
                 overflow-y: auto;
                 overflow-x: hidden;
                 width: 800px;
+                background: #27ae60;
             }
             #messagesheader {
                 padding: 10px;
@@ -140,7 +141,7 @@
                 overflow-x: hidden;
                 width: 800px;
             }
-            #messagesheader {
+            /*#messagesheader {
                 padding: 10px;
                 border-radius: 5px 5px 0px 0px;
                 z-index: 10;
@@ -148,7 +149,7 @@
                 color: #fff;
                 width: 100%;
                 height: 20px;
-            }
+            }*/
             #window-function-container {
                 position: absolute;
                 top: 5px;
@@ -350,6 +351,13 @@
                 width: 300px;
                 background: black;
             }
+
+            .message-frame {
+                width: 100%;
+                height: 90%;
+                border: none;
+                overflow: hidden;
+            }
         </style>
         <script>
             function menu()
@@ -382,6 +390,8 @@
             function closeMenu()
             {
                 var taskbar = document.getElementById("taskbar");
+                var newnote = document.getElementById("new-note");
+
                 taskbar.style.width = "100%";
                 taskbar.style.height = "50px";
                 taskbar.style.bottom = "0";
@@ -389,6 +399,8 @@
                 taskbar.style.right = "0";
                 taskbar.style.borderRadius = "25px 25px 0px 0px";
                 taskbar.style.boxShadow = "none";
+
+                newnote.style.bottom = "-50px";
             }
             function openDocs()
             {
@@ -561,9 +573,7 @@
                 <div id="messagesheader">
                     Messages
                 </div>
-                <p>
-                    Content Here
-                </p>
+                <iframe src="message-app.html" frameborder="0" class="message-frame"></iframe>
             </div>
 
             <div id="internet">
