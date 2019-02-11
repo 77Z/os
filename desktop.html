@@ -379,7 +379,7 @@
                 z-index: -1;
                 width: 100%;
                 height: 100%;
-                background: red;
+                background: transparent;
                 top: 0;
                 left: 0;
             }
@@ -516,11 +516,13 @@
                     fmenu.style.left = "20px";
                 }
             }
+
             function closefmenu()
             {
                 var fmenu = document.getElementById("full-menu");
                 fmenu.style.left = "-450px";
             }
+
             function normTaskbar()
             {
                 var taskbar = document.getElementById("taskbar");
@@ -531,6 +533,7 @@
                 fdot.style.display = "none";
                 clock.style.textShadow = "none";
             }
+
             function notification(title, content)
             {
                 var notification = document.getElementById("notification");
@@ -538,13 +541,16 @@
                 notificationHistory.innerHTML = "<h3>" + title + "</h3><span>" + content + "</span>";
                 notification.innerHTML = "<h3>" + title + "</h3><span>" + content + "</span>";
                 notification.style.right = "10px";
+                
                 setInterval(closeNotif, 3000);
             }
+
             function closeNotif()
             {
                 var notification = document.getElementById("notification");
                 notification.style.right = "-1000px";
             }
+
             function notifBoxToggle()
             {
                 var notifBox = document.getElementById("notifications-box");
@@ -559,27 +565,32 @@
                     notifBox.style.bottom = "-450px";
                 }
             }
+
             function openMessages() {
                 document.getElementById("messages").style.display = "block";
                 closeMenu();
             }
+
             function openInternet() {
                 document.getElementById("internet").style.display = "block";
                 closeMenu();
             }
+
             function openSettings() {
                 document.getElementById("settings").style.display = "block";
                 closeMenu();
             }
+
             function checkthis() {
                 document.getElementById(this).firstChild.style.background = "yellow";
             }
-            function createStickyNote(id, title) {
+
+            /*function createStickyNote(id, title) {
                 var noteid = "note" + id;
                 var body = document.getElementById("body");
                 body.append = "<div id='note" + id + "'><div id='note" + id +"header'>" + title + "</div></div>";
                 dragElement(document.getElementById(noteid));
-            }
+            }*/
 
             function showDesktopContextMenu() {
                 return false;
@@ -773,6 +784,10 @@
 
 
         <script src="hardware-interaction-controller.js"></script>
+
+
+
+        <script src="stickynotecontroller.js"></script>
 
 
     </body>
