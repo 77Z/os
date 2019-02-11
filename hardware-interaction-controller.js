@@ -1,6 +1,6 @@
 var $ = require("jquery");
 const remote = require('electron').remote;
-var changeBrightness = require(node-brightness);
+var changeBrightness = require('node-brightness');
 
 $("#soft-restart-button").click(function () {
     remote.app.relaunch();
