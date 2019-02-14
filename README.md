@@ -1,6 +1,6 @@
 # ZOS
 
-##How To install beta
+## How To install beta
 
 in order to opt into beta you need [node.js](https://nodejs.org/en/) and [git](https://git-scm.com/).
 
