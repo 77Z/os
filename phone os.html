@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <title>
+            Phone OS
+        </title>
+        <style>
+            body {
+                overflow: hidden;
+            }
+
+            * {
+                font-family: 'Open Sans';
+                user-select: none;
+            }
+
+            .phone {
+                background: white;
+                height: 700px;
+                width: 350px;
+                border-top: 50px solid black;
+                border-bottom: 50px solid black;
+                border-left: 10px solid black;
+                border-right: 10px solid black;
+                border-radius: 20px;
+                margin: 0px auto;
+                position: relative;
+            }
+
+            .nav-drawer {
+                position: absolute;
+                bottom: 20px;
+                left: 5%;
+                right: 5%;
+                background: white;
+                box-shadow: 0px 2px 10px gray;
+                width: 90%;
+                height: 50px;
+                transition: 0.3s;
+            }
+
+            .nav-drawer h1 {
+                margin: 0px;
+                text-align: center;
+            }
+
+            .time {
+                text-align: center;
+                margin-top: 50px;
+                font-size: 45px;
+            }
+
+            .time-top, .time-bottom {
+                margin: 0px;
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                grid-template-rows: auto auto auto;
+                padding: 10px;
+                background: lightblue;
+                margin: 50px 5px 0px 5px;
+                grid-gap: 10px 10px;
+                display: none;
+            }
+
+            .grid-item {
+                background: rgb(118, 198, 224);
+                border-radius: 10px;
+                font-size: 20px;
+                height: 50px;
+                text-align: center;
+                padding-top: 20px;
+            }
+        </style>
+        <script>
+            function locktoggle() {
+                var lock = document.getElementById("lock");
+                var passkey = document.getElementById("passkey");
+
+                if (lock.style.height == "50px") {
+                    lock.style.height = "90%";
+                    lock.style.bottom = "5%";
+
+                    passkey.style.display = "grid";
+                } else {
+                    lock.style.height = "50px";
+                    lock.style.bottom = "20px";
+
+                    passkey.style.display = "none";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        
+
+        <div class="phone">
+            <div class="time">
+                <p class="time-top">03</p>
+                <p class="time-bottom">00</p>
+            </div>
+
+            <div class="nav-drawer" onclick="locktoggle()" id="lock">
+                <h1>
+                    Enter Your Passkey
+                </h1>
+                <div class="grid-container" id="passkey">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                    <div class="grid-item">7</div>
+                    <div class="grid-item">8</div>
+                    <div class="grid-item">9</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
