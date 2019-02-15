@@ -11,6 +11,7 @@
         <style>
             body {
                 overflow: hidden;
+                background: lightcyan;
             }
 
             * {
@@ -18,7 +19,18 @@
                 user-select: none;
             }
 
-            
+            .phone {
+                background: white;
+                height: 700px;
+                width: 350px;
+                border-top: 50px solid black;
+                border-bottom: 50px solid black;
+                border-left: 10px solid black;
+                border-right: 10px solid black;
+                border-radius: 20px;
+                margin: 0px auto;
+                position: relative;
+            }
 
             .nav-drawer {
                 position: absolute;
@@ -41,6 +53,7 @@
                 text-align: center;
                 margin-top: 50px;
                 font-size: 45px;
+                transition: 0.5s;
             }
 
             .time-top, .time-bottom {
@@ -48,14 +61,19 @@
             }
 
             .grid-container {
-                display: grid;
                 grid-template-columns: auto auto auto;
                 grid-template-rows: auto auto auto;
-                padding: 10px;
                 background: lightblue;
-                margin: 50px 5px 0px 5px;
                 grid-gap: 10px 10px;
-                display: none;
+                display: grid;
+                position: absolute;
+                width: 80%;
+                left: 10%;
+                right: 10%;
+                border-radius: 10px;
+                bottom: -300px;
+                transition: 0.3s;
+                opacity: 0;
             }
 
             .grid-item {
@@ -65,6 +83,71 @@
                 height: 50px;
                 text-align: center;
                 padding-top: 20px;
+            }
+
+            .grid-item:active {
+                background: rgb(87, 168, 223);
+            }
+
+            #lockscreen {
+                position: absolute;
+                background: white;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                transition: 0.5s;
+            }
+
+            #homescreen {
+                width: 100%;
+                height: 100%;
+                background: white;
+                left: 100%;
+                top: 0;
+                position: absolute;
+                transition: 0.5s;
+            }
+
+            #taskbar {
+                position: absolute;
+                bottom: 20px;
+                left: 5%;
+                width: 90%;
+                height: 50px;
+                background: white;
+                border-radius: 1000px;
+                transition: 0.5s;
+                box-shadow: 0px 2px 10px gray;
+            }
+
+            .arrow-container {
+                width: 70px;
+                height: 95%;
+                margin: 0px auto;
+                background: transparent;
+                position: relative;
+            }
+
+            #arrow-1 {
+                width: 42px;
+                height: 3px;
+                position: absolute;
+                top: 20px;
+                transform: rotate(-45deg);
+                background: black;
+                transition: 0.5s;
+            }
+
+            #arrow-2 {
+                width: 42px;
+                height: 3px;
+                position: absolute;
+                top: 20px;
+                transform: rotate(45deg);
+                background: black;
+                right: 0px;
+                transition: 0.5s;
             }
         </style>
         <script>
@@ -76,12 +159,45 @@
                     lock.style.height = "90%";
                     lock.style.bottom = "5%";
 
-                    passkey.style.display = "grid";
+                    passkey.style.opacity = "1";
+                    passkey.style.bottom = "200px";
                 } else {
                     lock.style.height = "50px";
                     lock.style.bottom = "20px";
 
-                    passkey.style.display = "none";
+                    passkey.style.opacity = "0";
+                    passkey.style.bottom = "-300px";
+                }
+            }
+
+            function unlockPhone() {
+                var lockscreen = document.getElementById("lockscreen");
+                var homescreen = document.getElementById("homescreen");
+
+                lockscreen.style.left = "-100%";
+
+                homescreen.style.left = "0";
+            }
+            function openTaskbarMenu() {
+                var arrow1 = document.getElementById("arrow-1");
+                var arrow2 = document.getElementById("arrow-2");
+
+                var taskbar = document.getElementById("taskbar");
+
+                if (arrow1.style.transform == "rotate(-45deg)") {
+                    // if closed
+
+                    arrow1.style.transform = "rotate(-180deg)";
+                    arrow2.style.transform = "rotate(180deg)";
+
+                    taskbar.style.height = "90%";
+                    taskbar.style.borderRadius = "25px";
+                } else {
+                    arrow1.style.transform = "rotate(-45deg)";
+                    arrow2.style.transform = "rotate(45deg)";
+
+                    taskbar.style.height = "50px";
+                    taskbar.style.borderRadius = "1000px";
                 }
             }
         </script>
@@ -89,28 +205,49 @@
     <body>
         
 
-        
-            <div class="time">
-                <p class="time-top">03</p>
-                <p class="time-bottom">00</p>
-            </div>
 
-            <div class="nav-drawer" onclick="locktoggle()" id="lock">
-                <h1>
-                    Enter Your Passkey
-                </h1>
+            <div id="lockscreen">
+                <div class="time">
+                    <p class="time-top">03</p>
+                    <p class="time-bottom">00</p>
+                </div>
+
+                <div class="nav-drawer" onclick="locktoggle()" id="lock">
+                    <h1>
+                        Enter Your Passkey
+                    </h1>
+                </div>
                 <div class="grid-container" id="passkey">
-                    <div class="grid-item">1</div>
-                    <div class="grid-item">2</div>
-                    <div class="grid-item">3</div>
-                    <div class="grid-item">4</div>
-                    <div class="grid-item">5</div>
-                    <div class="grid-item">6</div>
-                    <div class="grid-item">7</div>
-                    <div class="grid-item">8</div>
-                    <div class="grid-item">9</div>
+                    <div class="grid-item" onclick="unlockPhone()">1</div>
+                    <div class="grid-item" onclick="unlockPhone()">2</div>
+                    <div class="grid-item" onclick="unlockPhone()">3</div>
+                    <div class="grid-item" onclick="unlockPhone()">4</div>
+                    <div class="grid-item" onclick="unlockPhone()">5</div>
+                    <div class="grid-item" onclick="unlockPhone()">6</div>
+                    <div class="grid-item" onclick="unlockPhone()">7</div>
+                    <div class="grid-item" onclick="unlockPhone()">8</div>
+                    <div class="grid-item" onclick="unlockPhone()">9</div>
                 </div>
             </div>
-        
+
+            <div id="homescreen">
+                <div id="taskbar" onclick="openTaskbarMenu()">
+                    
+                    <div class="arrow-container">
+                        <div id="arrow-1"></div>
+                        <div id="arrow-2"></div>
+                    </div>
+                    
+                    <!--
+
+                    <div class="grid-container-taskbar">
+
+                                        </div>
+
+                    -->
+                </div>
+            </div>
+            
+
     </body>
 </html>
