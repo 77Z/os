@@ -462,7 +462,6 @@
             height: 150px;
             max-width: 600px;
             overflow: hidden;
-            position: absolute;
             top: 35px;
             width: 44px;
             }
@@ -564,6 +563,12 @@
                 border: none;
                 width: 200px;
                 height: 200px;
+                resize: both;
+            }
+            
+            .sticky-note-header {
+                width: 100%;
+                background: darkorange;
             }
         </style>
         <script>
@@ -969,6 +974,8 @@
             <div class="menu-button docs" onclick="openDocs()"></div>
             <div class="menu-button material-icons" style="text-align: center;color: black;font-size: 25px;" onclick="openMessages()">message</div>
             <div class="menu-button" style="background-image: url('internet.png');" onclick="openInternet()"></div>
+            <div class="menu-button" onclick="openDino()"></div>
+            <div class="menu-button" onclick="openSettings()"></div>
             <br>
             <div class="menu-button" onclick="notification('test', 'testing testing words')"></div>
             <div class="material-icons" id="new-note">
@@ -1000,7 +1007,41 @@
 
 
 
-        <script src="stickynotecontroller.js"></script>
+        <!-- <script src="stickynotecontroller.js"></script> -->
+
+        <script>
+            
+            var $ = require("jquery");
+
+                $("#new-note").click(function () {
+                    var noteid = "note" + Math.random();
+
+
+                    $('#body').append("<div class='sticky-note' id='" + noteid +"'><div class='sticky-note-header' id='" + noteid +"header'>Note</div></div>");
+
+                    dragElement(document.getElementById(noteid));
+                    
+                });
+
+        </script>
+
+        <script>
+            var fs = require('file-system');
+
+            var myDir = "C:/";
+
+            fs.readDir(myDir, function(dir) {
+            // es5
+            for(var i = 0, l = dir.length; i < l; i++) {
+                var filePath = dir[i];
+                console.log(filePath)
+            }
+            // es6
+            for(let filePath of dir) {
+                console.log(filePath);
+            }
+            });
+        </script>
 
 
 
