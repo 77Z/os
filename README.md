@@ -25,3 +25,9 @@ npm start
 ```
 
 and you're up and running!
+
+if a new version comes out go into the terminal on the OS folder and type
+
+```
+git pull
+```
