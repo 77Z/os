@@ -1,4 +1,5 @@
 const {app, BrowserWindow, Menu} = require('electron');
+const remote = require('electron').remote;
 
 const template = [
     {
@@ -10,6 +11,14 @@ const template = [
                 click() {
                     mainWindow.loadURL(`file://${__dirname}/desktop.html`)
                 }
+            },
+            {
+              label: "Hard Reload",
+              accelerator: "CmdOrCtrl+Shift+R",
+              click() {
+                remote.app.relaunch();
+                remote.app.exit(0);
+              }
             },
             {
                 label: "DT",
@@ -24,6 +33,13 @@ const template = [
               click() {
                 mainWindow.loadURL(`file://${__dirname}/cam.html`)
               }
+            },
+            {
+              label: "TEsst",
+              accelerator: "CmdOrCtrl+Shift+Alt+C",
+              click() {
+                mainWindow.loadURL("https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter");
+              }
             }
         ]
     }
@@ -35,8 +51,9 @@ Menu.setApplicationMenu(menu)
 function createWindow () {
 	
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false})
-mainWindow.setFullScreen(true);
+  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false, webPreferences: { experimentalFeatures: true } })
+  mainWindow.setFullScreen(true);
+
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/desktop.html`)
 
