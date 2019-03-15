@@ -621,6 +621,24 @@
             .desktop-file-cluster span {
                 display: inline;
             }
+
+            ::-webkit-scrollbar {
+              width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+              background: #f1f1f1; 
+              border-radius: 1000px 0px 0px 1000px;
+            }
+             
+            ::-webkit-scrollbar-thumb {
+              background: #888;
+              border-radius: 1000px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+              background: #555; 
+            }
         </style>
     <script>
         function menu()
@@ -1152,7 +1170,10 @@
             .then(output => {
                 console.log(output);
                 $("#update-log").append(output);
-                document.location.href = "desktop.html";
+                if ($('#update-log').length > 0) {
+                    document.location.href = "desktop.html";
+                }
+                //document.location.href = "desktop.html";
             })
             .catch(err => {
                 console.log(err);
