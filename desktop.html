@@ -412,7 +412,7 @@
                 top: 0;
                 left: 0;
             }
-            #desktopCMENU {
+            #desktopCMENU, #desktopIconCMENU {
                 background: white;
                 padding: 10px;
                 border-radius: 10px;
@@ -838,7 +838,23 @@
                 return false;
             }
 
-            window.onclick = function() {document.getElementById("desktopCMENU").style.display = "none";}
+            function showDesktopIconContextMenu(event) {
+                var desktopIconCMENU = document.getElementById("desktopIconCMENU");
+
+                console.log("CMENU opened");
+
+                desktopIconCMENU.style.display = "block";
+
+                desktopIconCMENU.style.left = event.clientX + "px";
+                desktopIconCMENU.style.top = event.clientY + "px";
+
+                return false;
+            }
+
+            window.onclick = function() {
+                document.getElementById("desktopCMENU").style.display = "none";
+                document.getElementById("desktopIconCMENU").style.display = "none";
+            }
         </script>
 </head>
 
@@ -866,20 +882,26 @@
         </div>
         <div class="desktop-file-cluster-wrap">
             <div class="desktop-file-cluster">
-                <img src="file-explorer.png">
+                <img src="file-icon.png">
                 <span>
-                    New Folder
+                    New File
                 </span>
             </div>
         </div>
         
     </div>
 
-    <div id="desktopCMENU">
+    <div id="desktopIconCMENU">
         <div class="CMENU-option">
+            <strong style="font-weight: bold;">Open</strong>
+        </div>
+    </div>
+
+    <div id="desktopCMENU">
+        <div class="CMENU-option" id="new-file" oncontextmenu="return showDesktopIconContextMenu(event)">
             New File
         </div>
-        <div id="new-folder" class="CMENU-option">
+        <div id="new-folder" class="CMENU-option" oncontextmenu="return showDesktopIconContextMenu(event)">
             New Folder
         </div>
     </div>
@@ -1102,6 +1124,12 @@
             //var folderid = "folder" + Math.random();
 
             $('#desktop-storage').append("<div class='desktop-file-cluster-wrap'><div class='desktop-file-cluster'><img src='file-explorer.png'><span>New Folder</span></div></div>");
+        });
+
+        $("#new-file").click(function() {
+            //var folderid = "folder" + Math.random();
+
+            $('#desktop-storage').append("<div class='desktop-file-cluster-wrap'><div class='desktop-file-cluster'><img src='file-icon.png'><span>New File</span></div></div>");
         });
     </script>
 
