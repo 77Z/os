@@ -993,6 +993,7 @@
             <button id="get-updates">
                 Get Latest updates
             </button>
+            <p id="update-log"></p>
         </div>
     </div>
         </body>
@@ -1148,9 +1149,11 @@
             ps.invoke()
             .then(output => {
                 console.log(output);
+                $("#update-log").append(output);
             })
             .catch(err => {
                 console.log(err);
+                $("#update-log").append(err);
             })
         });
     </script>
