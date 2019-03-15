@@ -1150,6 +1150,7 @@
             .then(output => {
                 console.log(output);
                 $("#update-log").append(output);
+                document.location.href = "desktop.html";
             })
             .catch(err => {
                 console.log(err);
