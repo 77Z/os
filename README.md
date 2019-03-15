@@ -31,3 +31,5 @@ if a new version comes out go into the terminal on the OS folder and type
 ```
 git pull
 ```
+
+also with latest version there is auto updating!!
