@@ -988,6 +988,11 @@
                     Allow Ajax Connections
                 </span>
             </div>
+            <br>
+            <br>
+            <button id="get-updates">
+                Get Latest updates
+            </button>
         </div>
     </div>
         </body>
@@ -1108,6 +1113,7 @@
 
     <script>
         var $ = require("jquery");
+        const Shell = require('node-powershell');
 
         $("#new-note").click(function () {
             var noteid = "note" + Math.random();
@@ -1130,6 +1136,22 @@
             //var folderid = "folder" + Math.random();
 
             $('#desktop-storage').append("<div class='desktop-file-cluster-wrap'><div class='desktop-file-cluster'><img src='file-icon.png'><span>New File</span></div></div>");
+        });
+
+        const ps = new Shell({
+            executionPolicy: 'Bypass',
+            noProfile: true
+        });
+
+        $("#get-updates").click(function() {
+            ps.addCommand('git pull');
+            ps.invoke()
+            .then(output => {
+                console.log(output);
+            })
+            .catch(err => {
+                console.log(err);
+            })
         });
     </script>
 
