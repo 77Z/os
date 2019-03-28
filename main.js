@@ -38,7 +38,7 @@ const template = [
               label: "TEsst",
               accelerator: "CmdOrCtrl+Shift+Alt+C",
               click() {
-                mainWindow.loadURL("https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter");
+                mainWindow.loadURL(`file://${__dirname}/developer/index.html`);
               }
             }
         ]
