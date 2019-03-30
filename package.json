@@ -8,6 +8,7 @@
     "electron-installer-squirrel-windows": "^1.3.0",
     "file-system": "^2.2.2",
     "jquery": "^3.3.1",
+    "loggit-npm": "^1.5.0",
     "node-brightness": "^0.2.1",
     "node-powershell": "^4.0.0"
   },
